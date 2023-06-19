@@ -1,0 +1,19 @@
+import { useEffect, useState } from "react";
+
+const useDelayUnmount = (isMounted: boolean, delayTime: number) => {
+  const [showDiv, setShowDiv] = useState(false);
+
+  useEffect(() => {
+    let timeoutId: string | number | NodeJS.Timeout;
+
+    if (isMounted && !showDiv) {
+      setShowDiv(true);
+    } else if (!isMounted && showDiv) {
+      timeoutId = setTimeout(() => setShowDiv(false), delayTime);
+    }
+    return () => clearTimeout(timeoutId);
+  }, [isMounted, delayTime, showDiv]);
+  return showDiv;
+};
+
+export default useDelayUnmount;
