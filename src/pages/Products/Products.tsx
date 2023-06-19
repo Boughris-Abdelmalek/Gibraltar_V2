@@ -7,7 +7,7 @@ import Loader from "../../components/Loader/Loader";
 const Products = () => {
   const dispatch = useAppDispatch();
   const products = useAppSelector(selectAllProducts);
-  const { data, isFetching } = useGetAllProductsQuery();
+  const { data, isFetching } = useGetAllProductsQuery({ limit: 0 });
 
   React.useEffect(() => {
     if (data) {
@@ -22,7 +22,14 @@ const Products = () => {
       ) : (
         <ul>
           {products.map((product) => {
-            return <li>{product.title}</li>;
+            return (
+              <>
+                <li>
+                  {/* <img src={product.image} alt={product.title} /> */}
+                  <p>{product.title}</p>
+                </li>
+              </>
+            );
           })}
         </ul>
       )}

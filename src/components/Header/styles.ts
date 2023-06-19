@@ -20,6 +20,7 @@ const slideOutAnimation = keyframes`
     visibility: visible;
     min-height: 100%;
   }
+
   100% {
     opacity: 0;
     visibility: hidden;
@@ -28,8 +29,7 @@ const slideOutAnimation = keyframes`
 `;
 
 export const Container = styled.header`
-  padding: 1rem;
-  height: 8rem;
+  height: 5rem;
   width: 100%;
 `;
 
@@ -40,11 +40,15 @@ export const Navigation = styled.nav`
   align-items: center;
   gap: 1rem;
   height: 100%;
+  background-color: black;
+  color: white;
+  padding: 0 1rem 0 2rem;
 
+  
   @media (max-width: 768px) {
     justify-content: space-between;
   }
-`;
+  `;
 
 export const NavItems = styled.ul`
   display: flex;
@@ -52,7 +56,10 @@ export const NavItems = styled.ul`
   align-items: center;
   height: 4rem;
   width: 100%;
-
+  
+  &:nth-child(4) {
+    justify-content: flex-end;
+  }
   @media (max-width: 1150px) {
     display: none;
   }
@@ -66,11 +73,11 @@ export const NavItem = styled(NavLink)`
   height: 100%;
   aspect-ratio: 1;
   padding: 0 2rem;
-  font-size: 1.5rem;
+  font-size: 1.25rem;
   cursor: pointer;
 
   svg {
-    font-size: 2.5rem;
+    font-size: 2rem;
   }
 
   &:hover {
@@ -112,15 +119,10 @@ export const BurgerMenu = styled.div`
   @media (max-width: 1150px) {
     display: block;
     z-index: 3;
-
-    svg {
-      width: 3rem;
-      height: 100%;
-    }
   }
 
   svg {
-    width: 4rem;
+    width: 3rem;
     height: 100%;
   }
 `;
@@ -135,7 +137,8 @@ export const BurgerMenuItems = styled.div`
   justify-content: center;
   align-items: center;
   width: 100%;
-  background-color: white;
+  background-color: black;
+  color: white;
   z-index: 2;
   visibility: hidden;
 
