@@ -82,7 +82,7 @@ export const NavItem = styled(NavLink)`
     aspect-ratio: 3/4;
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: 1150px) {
     &:hover {
       outline: none;
     }
