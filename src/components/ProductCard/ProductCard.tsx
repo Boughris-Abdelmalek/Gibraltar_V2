@@ -15,11 +15,12 @@ import { AddToCartIcon } from "../Icon/Icon";
 
 import { MdStarBorder, MdStarHalf, MdStar } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
+import { IProps } from "./IProps";
 
-const generateStarRating = (rate) => {
+const generateStarRating = (rate?: number) => {
   const stars = [];
-  const fullStars = Math.floor(rate);
-  const hasHalfStar = rate - fullStars > 0.5;
+  const fullStars = Math.floor(rate || 0);
+  const hasHalfStar = (rate || 0) - fullStars > 0.5;
 
   for (let i = 1; i <= 5; i++) {
     if (i <= fullStars) {
@@ -33,25 +34,24 @@ const generateStarRating = (rate) => {
   return stars;
 };
 
-const ProductCard: React.FC = ({ item }) => {
-  const { title, image, price, rating, id } = item;
-  
-  const truncateTitle = (title) => {
-    if (title.length > 50) {
-      return title.substring(0, 50) + "...";
-    }
-    return title;
-  };
-  
+const truncateTitle = (title?: string) => {
+  if (title && title.length > 50) {
+    return title.substring(0, 50) + "...";
+  }
+  return title;
+};
+
+const ProductCard: React.FC<IProps> = ({ item }) => {
+  const { title, image, price, rating, id } = item || {};
+
   const truncatedTitle = truncateTitle(title);
-  const starRating = generateStarRating(rating.rate);
+  const starRating = generateStarRating(rating?.rate);
 
   const navigate = useNavigate();
 
   const handleClick = () => {
     navigate(`/products/${id}`);
   };
-
 
   return (
     <Card onClick={handleClick}>
@@ -61,7 +61,7 @@ const ProductCard: React.FC = ({ item }) => {
         <Price>{price}$</Price>
         <Rating>
           <Rate>{starRating}</Rate>
-          <Count>({rating.count})</Count>
+          <Count>({rating?.count})</Count>
         </Rating>
       </ProductDetails>
       <ProductActions>

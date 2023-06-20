@@ -3,9 +3,9 @@ import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { useGetAllProductsQuery } from "../../features/products/ProductsApiSlice";
 import { selectAllProducts, setAllProducts } from "../../features/products/ProductsSlice";
 import Loader from "../../components/Loader/Loader";
-import ProductCard from "../../components/ProductCard/ProductCard";
 
-import { ProductSection, ProductsGrid } from "./styles";
+import { ProductSection } from "./styles";
+import ProductsGrid from "../../components/ProductsGrid/ProductsGrid";
 
 const Products: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -23,11 +23,7 @@ const Products: React.FC = () => {
       {isFetching ? (
         <Loader />
       ) : (
-        <ProductsGrid>
-          {products.map((product) => (
-            <ProductCard key={product.id} item={product} />
-          ))}
-        </ProductsGrid>
+        <ProductsGrid products={products} />
       )}
     </ProductSection>
   );

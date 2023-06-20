@@ -19,3 +19,12 @@ export interface Rating {
   count: number;
   rate: number;
 }
+
+export interface InitialProductsState {
+  products: RootObject[];
+  product: RootObject | null;
+  productsByCategory: {
+    relatedProducts: RootObject[];
+    category: Category;
+  } | null;
+}

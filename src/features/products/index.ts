@@ -1,5 +1,4 @@
 export {
-  default as ProductsSlice,
   setAllProducts,
   setProductById,
   setProductsByCategory,

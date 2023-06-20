@@ -11,35 +11,29 @@ import {
   useGetProductsByCategoryQuery,
 } from "../../features/products";
 
+import ProductsGrid from "../../components/ProductsGrid/ProductsGrid";
+
+import { ProductsDetailsSection } from "./styles";
+import TextField from "../../components/TextField/TextField";
+
 const ProductsDetails: React.FC = () => {
   const { id: productId } = useParams<{ id: string }>();
   const dispatch = useAppDispatch();
-  const relatedProducts = useAppSelector(selectAllProductsByCategory);
+  const productsByCategory = useAppSelector(selectAllProductsByCategory);
   const product = useAppSelector(selectProductById);
   const { data: productsByCategoryData } = useGetProductsByCategoryQuery(product?.category);
   const { data: selectedProductData } = useGetProductByIdQuery(Number(productId));
 
   useEffect(() => {
-    if (selectedProductData) {
-      dispatch(setProductById(selectedProductData));
-    }
-
-    if (productsByCategoryData) {
-      dispatch(setProductsByCategory(productsByCategoryData));
-    }
+    selectedProductData && dispatch(setProductById(selectedProductData));
+    productsByCategoryData && dispatch(setProductsByCategory(productsByCategoryData));
   }, [productsByCategoryData, selectedProductData, dispatch]);
 
-  console.log(relatedProducts);
-
   return (
-    <>
-      <h1>{productId}</h1>
-      {/* <ul>
-        {relatedProducts.map((item) => { // Renamed productsRelated to relatedProducts
-          return <li key={item.id}>{item.title}</li>;
-        })}
-      </ul> */}
-    </>
+    <ProductsDetailsSection>
+      <TextField variant="h3">{product?.title}</TextField>
+      {productsByCategory && <ProductsGrid products={productsByCategory.relatedProducts} />}
+    </ProductsDetailsSection>
   );
 };
 

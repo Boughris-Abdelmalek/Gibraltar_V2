@@ -1,11 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { RootState } from "../../app/store";
-import { RootObject, Category } from "./IProps";
+import { InitialProductsState } from "./IProps";
 
-const initialProducts = {
-  products: [] as RootObject[],
-  product: null as RootObject | null,
-  productsByCategory: null as { relatedProducts: RootObject[], category: Category } | null,
+const initialProducts: InitialProductsState = {
+  products: [],
+  product: null,
+  productsByCategory: null,
 };
 
 const productsSlice = createSlice({
