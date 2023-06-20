@@ -1,28 +1,32 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { useGetAllProductsQuery } from "../../features/products/ProductsApiSlice";
-import { selectAllProducts, getAllProducts } from "../../features/products/ProductsSlice";
+import { selectAllProducts, setAllProducts } from "../../features/products/ProductsSlice";
+import Loader from "../../components/Loader/Loader";
 
-const Products = () => {
+import { ProductSection } from "./styles";
+import ProductsGrid from "../../components/ProductsGrid/ProductsGrid";
+
+const Products: React.FC = () => {
   const dispatch = useAppDispatch();
   const products = useAppSelector(selectAllProducts);
-  const { data } = useGetAllProductsQuery();
+  const { data, isFetching } = useGetAllProductsQuery({ limit: 0 });
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (data) {
-      dispatch(getAllProducts(data));
+      dispatch(setAllProducts(data));
     }
-  }, [data]);
+  }, [data, dispatch]);
 
-  return <div>
-    <ul>
-      {
-        products.map(product => {
-          return <li>{product.title}</li>
-        })
-      }
-    </ul>
-  </div>;
+  return (
+    <ProductSection>
+      {isFetching ? (
+        <Loader />
+      ) : (
+        <ProductsGrid products={products} />
+      )}
+    </ProductSection>
+  );
 };
 
 export default Products;
