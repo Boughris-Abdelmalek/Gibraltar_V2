@@ -30,6 +30,7 @@ export const Slides = styled(SwiperSlide)`
   justify-content: flex-start;
   align-items: center;
   flex-direction: row;
+  background-color: white;
 
   h3 {
     width: 100%;

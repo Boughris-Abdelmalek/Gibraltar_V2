@@ -5,7 +5,7 @@ export const SearchBarContainer = styled.div`
   display: flex;
   align-items: center;
   width: 100%;
-  height: 2%.5;
+  height: 3rem;
   padding: 8px;
   border: 1px solid #ccc;
   border-radius: 4px;
@@ -22,7 +22,7 @@ export const SearchInput = styled.input`
   border: none;
   outline: none;
   padding: 0 8px;
-  font-size: 1.25rem;
+  font-size: 1.125rem;
 
   @media (max-width: 1150px) {
     font-size: 1rem;

@@ -1,39 +1,35 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { useGetAllProductsQuery } from "../../features/products/ProductsApiSlice";
-import { selectAllProducts, getAllProducts } from "../../features/products/ProductsSlice";
+import { selectAllProducts, setAllProducts } from "../../features/products/ProductsSlice";
 import Loader from "../../components/Loader/Loader";
+import ProductCard from "../../components/ProductCard/ProductCard";
 
-const Products = () => {
+import { ProductSection, ProductsGrid } from "./styles";
+
+const Products: React.FC = () => {
   const dispatch = useAppDispatch();
   const products = useAppSelector(selectAllProducts);
   const { data, isFetching } = useGetAllProductsQuery({ limit: 0 });
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (data) {
-      dispatch(getAllProducts(data));
+      dispatch(setAllProducts(data));
     }
-  }, [data]);
+  }, [data, dispatch]);
 
   return (
-    <div>
+    <ProductSection>
       {isFetching ? (
         <Loader />
       ) : (
-        <ul>
-          {products.map((product) => {
-            return (
-              <>
-                <li>
-                  {/* <img src={product.image} alt={product.title} /> */}
-                  <p>{product.title}</p>
-                </li>
-              </>
-            );
-          })}
-        </ul>
+        <ProductsGrid>
+          {products.map((product) => (
+            <ProductCard key={product.id} item={product} />
+          ))}
+        </ProductsGrid>
       )}
-    </div>
+    </ProductSection>
   );
 };
 

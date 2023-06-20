@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import Loader from "../../components/Loader/Loader";
 import { useGetAllProductsQuery } from "../../features/products/ProductsApiSlice";
-import { selectAllProducts, getAllProducts } from "../../features/products/ProductsSlice";
+import { selectAllProducts, setAllProducts } from "../../features/products/ProductsSlice";
 import { Slider, Slides, SlideDetails, ProductTitle, COT, Hero } from "./styles";
 
 import "swiper/css";
@@ -15,7 +15,7 @@ const Home: React.FC = () => {
 
   useEffect(() => {
     if (data) {
-      dispatch(getAllProducts(data));
+      dispatch(setAllProducts(data));
     }
   }, [data]);
 

@@ -4,6 +4,7 @@ import {
   MdPersonOutline as UserIcon,
   MdClose as CloseIcon,
   MdSearch as MagnifierIcon,
+  MdOutlineAddShoppingCart as AddToCartIcon,
 } from "react-icons/md";
 
-export { BurgerIcon, CartIcon, UserIcon, CloseIcon, MagnifierIcon };
+export { BurgerIcon, CartIcon, UserIcon, CloseIcon, MagnifierIcon, AddToCartIcon };
