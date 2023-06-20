@@ -6,10 +6,22 @@ export const Card = styled.div`
   justify-content: flex-start;
   align-items: flex-start;
   gap: 0.5rem;
-  height: 30rem;
-  width: 100%;
+  height: 40rem;
+  width: 25rem;
   outline: 1px solid #dddddd;
   border-radius: 2.5px;
+  background-color: white;
+  padding: 1rem;
+  cursor: pointer;
+
+  /* .product-title {
+    min-height: 10rem;
+  } */
+`;
+
+export const ImageContainer = styled.div`
+  height: 20rem;
+  width: 100%;
 `;
 
 export const Image = styled.img`
@@ -17,40 +29,33 @@ export const Image = styled.img`
   width: 100%;
   object-fit: contain;
   object-position: center;
-  background-color: white;
   padding: 2rem;
-
-
-  cursor: pointer;
 `;
 
 export const ProductDetails = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+  justify-content: flex-end;
   gap: 2rem;
-  height: 20rem;
+  height: 100%;
   width: 100%;
-  padding: 0 0.5rem;
-`;
-
-export const Title = styled.h3`
-  font-size: 1rem;
 `;
 
 export const Price = styled.h5`
   text-align: right;
+  width: 100%;
   font-size: 1.5rem;
 `;
 
 export const Rating = styled.span`
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
 `;
 
 export const Rate = styled.p`
-  color: #E67A00;
+  color: #e67a00;
 `;
 
 export const Count = styled.p`
@@ -58,13 +63,9 @@ export const Count = styled.p`
 `;
 
 export const ProductActions = styled.span`
-  align-self: center;
   display: flex;
   justify-content: space-between;
-  align-items: center;
   width: 100%;
-  height: 5rem;
-  padding: 1rem;
 
   svg {
     font-size: 2rem;

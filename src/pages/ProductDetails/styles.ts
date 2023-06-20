@@ -1,7 +1,7 @@
 import { styled } from "styled-components";
 
 export const ProductDetailsSection = styled.section`
-  min-height: calc(100vh - 10rem);
+  min-height: calc(100vh - 5rem);
   width: 100%;
 `;
 
@@ -10,7 +10,7 @@ export const ProductDetailsContainer = styled.div`
   justify-content: space-between;
   min-height: 100%;
   width: 100%;
-  padding: 5rem;
+  padding: 4rem;
 `;
 
 export const ProductInfos = styled.div`
@@ -32,8 +32,9 @@ export const ProductDetails = styled.div`
 export const ProductInfoSpan = styled.span``;
 
 export const ProductImage = styled.img`
-  width: 65%;
-  height: 100%;
+  width: 100%;
+  min-width: 25rem;
+  height: 45rem;
   object-fit: contain;
   background-color: white;
 `;
@@ -41,8 +42,9 @@ export const ProductImage = styled.img`
 export const ProductActions = styled.span`
   align-self: center;
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: center;
+  gap: 5rem;
   width: 100%;
   height: 100%;
   padding: 0 1rem;
@@ -93,5 +95,5 @@ export const Button = styled.button`
 `;
 
 export const ProductRelatedSection = styled.section`
-  min-height: 100vh;
+  height: 100%;
 `;

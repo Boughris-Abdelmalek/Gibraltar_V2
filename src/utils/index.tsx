@@ -18,8 +18,8 @@ export const generateStarRating = (rate?: number) => {
 };
 
 export const truncateTitle = (title?: string) => {
-  if (title && title.length > 50) {
-    return title.substring(0, 50) + "...";
+  if (title && title.length > 35) {
+    return title.substring(0, 35) + "...";
   }
   return title;
 };

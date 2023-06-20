@@ -5,8 +5,8 @@ import { IProps } from "./IProps";
 
 import {
   Card,
+  ImageContainer,
   Image,
-  Title,
   Price,
   Rating,
   Rate,
@@ -18,6 +18,7 @@ import {
 import { AddToCartIcon } from "../Icon/Icon";
 
 import { truncateTitle, generateStarRating } from "../../utils";
+import TextField from "../TextField/TextField";
 
 const ProductCard: React.FC<IProps> = ({ item }) => {
   const { title, image, price, rating, id } = item || {};
@@ -33,19 +34,23 @@ const ProductCard: React.FC<IProps> = ({ item }) => {
 
   return (
     <Card onClick={handleClick}>
-      <Image src={image} alt={title} width="100rem" />
+      <ImageContainer>
+        <Image src={image} alt={title} />
+      </ImageContainer>
       <ProductDetails>
-        <Title>{truncatedTitle}</Title>
-        <Price>{price}$</Price>
+        <TextField variant="h4" className="product-title">
+          {truncatedTitle}
+        </TextField>
         <Rating>
           <Rate>{starRating}</Rate>
           <Count>({rating?.count})</Count>
         </Rating>
+        <Price>{price}$</Price>
+        <ProductActions>
+          <AddToCartIcon />
+          <BuyButton>buy</BuyButton>
+        </ProductActions>
       </ProductDetails>
-      <ProductActions>
-        <AddToCartIcon />
-        <BuyButton>buy</BuyButton>
-      </ProductActions>
     </Card>
   );
 };
