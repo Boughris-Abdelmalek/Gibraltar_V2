@@ -13,16 +13,35 @@ import {
 
 import ProductsGrid from "../../components/ProductsGrid/ProductsGrid";
 
-import { ProductsDetailsSection } from "./styles";
+import {
+  ProductDetailsSection,
+  ProductDetailsContainer,
+  ProductImage,
+  ProductInfos,
+  ProductDetails,
+  ProductActions,
+  Button,
+  ProductInfoSpan,
+  ProductRelatedSection,
+  Rate,
+} from "./styles";
 import TextField from "../../components/TextField/TextField";
+import Loader from "../../components/Loader/Loader";
+import { AddToCartIcon } from "../../components/Icon/Icon";
+import { generateStarRating } from "../../utils";
 
 const ProductsDetails: React.FC = () => {
+  // using the id from the params to allow url changing and bookmarking
   const { id: productId } = useParams<{ id: string }>();
   const dispatch = useAppDispatch();
   const productsByCategory = useAppSelector(selectAllProductsByCategory);
   const product = useAppSelector(selectProductById);
   const { data: productsByCategoryData } = useGetProductsByCategoryQuery(product?.category);
-  const { data: selectedProductData } = useGetProductByIdQuery(Number(productId));
+  const { data: selectedProductData, isFetching } = useGetProductByIdQuery(Number(productId));
+
+  // name, image, price, description, and related products.
+
+  const starRating = generateStarRating(product?.rating?.rate);
 
   useEffect(() => {
     selectedProductData && dispatch(setProductById(selectedProductData));
@@ -30,10 +49,59 @@ const ProductsDetails: React.FC = () => {
   }, [productsByCategoryData, selectedProductData, dispatch]);
 
   return (
-    <ProductsDetailsSection>
-      <TextField variant="h3">{product?.title}</TextField>
-      {productsByCategory && <ProductsGrid products={productsByCategory.relatedProducts} />}
-    </ProductsDetailsSection>
+    <>
+      {isFetching ? (
+        <Loader />
+      ) : (
+        <>
+          <ProductDetailsSection>
+            <ProductDetailsContainer>
+              <ProductImage src={product?.image} alt={product?.title} />
+              <ProductInfos>
+                <ProductInfoSpan>
+                  <TextField variant="h2">{product?.title}</TextField>
+                  <Rate>
+                    <TextField variant="h4">{product?.rating?.rate}</TextField>
+                    {starRating}
+                    <TextField variant="h5" color="primary" className="rating-count">
+                      ({product?.rating?.count} ratings)
+                    </TextField>
+                  </Rate>
+                </ProductInfoSpan>
+                <ProductInfoSpan>
+                  <TextField variant="h4" transform="capitalize" weight="bold">
+                    price
+                  </TextField>
+                  <TextField variant="h5">{product?.price}$</TextField>
+                </ProductInfoSpan>
+                <ProductDetails>
+                  <ProductInfoSpan>
+                    <TextField variant="h4" weight="bold" transform="capitalize">
+                      category
+                    </TextField>
+                    <TextField variant="h5">{product?.category}</TextField>
+                  </ProductInfoSpan>
+                  <ProductInfoSpan>
+                    <TextField variant="h4" weight="bold" transform="capitalize">
+                      description
+                    </TextField>
+                    <TextField variant="h5">{product?.description}</TextField>
+                  </ProductInfoSpan>
+                  <ProductActions>
+                    <AddToCartIcon />
+                    <Button>buy</Button>
+                  </ProductActions>
+                </ProductDetails>
+              </ProductInfos>
+            </ProductDetailsContainer>
+          </ProductDetailsSection>
+          <ProductRelatedSection>
+            <TextField variant="h3">also in the {product?.category} category</TextField>
+            {productsByCategory && <ProductsGrid products={productsByCategory.relatedProducts} />}
+          </ProductRelatedSection>
+        </>
+      )}
+    </>
   );
 };
 

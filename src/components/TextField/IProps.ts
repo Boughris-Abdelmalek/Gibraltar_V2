@@ -4,6 +4,7 @@ export interface IProps {
     color?: string;
     align?: string;
     transform?: string;
+    className?: string;
     children?: React.ReactNode | string;
   }
   

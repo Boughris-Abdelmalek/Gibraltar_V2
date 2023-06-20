@@ -1,7 +1,7 @@
 import { IProps } from "./IProps";
 import { H1, H2, H3, H4, H5, H6, P } from "./styles";
 
-const TextField = ({ children, variant, weight, color, transform, align }: IProps) => {
+const TextField = ({ children, variant, weight, color, transform, align, className }: IProps) => {
   const Component =
     variant === "h1"
       ? H1
@@ -18,7 +18,7 @@ const TextField = ({ children, variant, weight, color, transform, align }: IProp
       : P;
 
   return (
-    <Component variant={variant} weight={weight} color={color} transform={transform} align={align}>
+    <Component variant={variant} weight={weight} color={color} transform={transform} align={align} className={className}>
       {children}
     </Component>
   );
