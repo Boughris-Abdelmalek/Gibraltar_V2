@@ -1,7 +1,7 @@
-import { apiSlice } from "../../app/api/apiSlice";
+import { fakeStoreApiSlice } from "../../app/api/fakeStoreApi";
 import { RootObject, Category } from "./IProps";
 
-export const productsApiSlice = apiSlice.injectEndpoints({
+export const productsApiSlice = fakeStoreApiSlice.injectEndpoints({
   endpoints: (builder) => ({
     getAllProducts: builder.query<RootObject[], { limit: number }>({
       query: ({ limit }) => ({

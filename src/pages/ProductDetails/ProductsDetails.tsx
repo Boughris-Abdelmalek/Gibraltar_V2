@@ -59,33 +59,33 @@ const ProductsDetails: React.FC = () => {
               <ProductImage src={product?.image} alt={product?.title} />
               <ProductInfos>
                 <ProductInfoSpan>
-                  <TextField variant="h2">{product?.title}</TextField>
+                  <TextField variant="h3">{product?.title}</TextField>
                   <Rate>
-                    <TextField variant="h4">{product?.rating?.rate}</TextField>
+                    <TextField variant="h5">{product?.rating?.rate}</TextField>
                     {starRating}
-                    <TextField variant="h5" color="primary" className="rating-count">
+                    <TextField variant="h6" color="primary" className="rating-count">
                       ({product?.rating?.count} ratings)
                     </TextField>
                   </Rate>
                 </ProductInfoSpan>
                 <ProductInfoSpan>
-                  <TextField variant="h4" transform="capitalize" weight="bold">
+                  <TextField variant="h5" transform="capitalize" weight="bold">
                     price
                   </TextField>
-                  <TextField variant="h5">{product?.price}$</TextField>
+                  <TextField variant="h6">{product?.price}$</TextField>
                 </ProductInfoSpan>
                 <ProductDetails>
                   <ProductInfoSpan>
-                    <TextField variant="h4" weight="bold" transform="capitalize">
+                    <TextField variant="h5" weight="bold" transform="capitalize">
                       category
                     </TextField>
                     <TextField variant="h5">{product?.category}</TextField>
                   </ProductInfoSpan>
                   <ProductInfoSpan>
-                    <TextField variant="h4" weight="bold" transform="capitalize">
+                    <TextField variant="h5" weight="bold" transform="capitalize">
                       description
                     </TextField>
-                    <TextField variant="h5">{product?.description}</TextField>
+                    <TextField variant="h6">{product?.description}</TextField>
                   </ProductInfoSpan>
                   <ProductActions>
                     <AddToCartIcon />
@@ -96,7 +96,7 @@ const ProductsDetails: React.FC = () => {
             </ProductDetailsContainer>
           </ProductDetailsSection>
           <ProductRelatedSection>
-            <TextField variant="h3">also in the {product?.category} category</TextField>
+            <TextField variant="h3" transform="uppercase" className="category-title">also in the {product?.category} category</TextField>
             {productsByCategory && <ProductsGrid products={productsByCategory.relatedProducts} />}
           </ProductRelatedSection>
         </>

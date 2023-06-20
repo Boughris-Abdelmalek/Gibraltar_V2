@@ -8,6 +8,7 @@ import About from "../pages/About/About";
 import Profile from "../pages/Profile/Profile";
 import Cart from "../pages/Cart/Cart";
 import ProductsDetails from "../pages/ProductDetails/ProductsDetails";
+import Login from "../pages/Login/Login";
 
 const App: React.FC = () => {
   return (
@@ -15,6 +16,7 @@ const App: React.FC = () => {
       <Route path="/" element={<Layout />}>
         {/* public routes */}
         <Route index element={<Home />} />
+        <Route path="/login" element={<Login />} />
         <Route path="/products" element={<Products />} />
         <Route path="/products/:id" element={<ProductsDetails />} />
         <Route path="/contact" element={<Contact />} />

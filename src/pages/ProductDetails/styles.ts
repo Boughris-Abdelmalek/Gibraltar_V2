@@ -34,7 +34,7 @@ export const ProductInfoSpan = styled.span``;
 export const ProductImage = styled.img`
   width: 100%;
   min-width: 25rem;
-  height: 45rem;
+  height: 40rem;
   object-fit: contain;
   background-color: white;
 `;
@@ -50,7 +50,7 @@ export const ProductActions = styled.span`
   padding: 0 1rem;
 
   svg {
-    font-size: 4rem;
+    font-size: 3rem;
     cursor: pointer;
   }
 `;
@@ -68,7 +68,7 @@ export const Rate = styled.span`
     font-size: 2rem;
   }
 
-  h4 {
+  h5 {
     flex: 1;
     padding: 0 0.5rem;
   }
@@ -86,14 +86,19 @@ export const Button = styled.button`
   all: unset;
   background-color: #2773ff;
   color: white;
-  font-size: 2rem;
+  font-size: 1.5rem;
   border-radius: 5px;
-  height: 4rem;
-  width: 10rem;
+  height: 3rem;
+  width: 8rem;
   text-align: center;
   cursor: pointer;
 `;
 
 export const ProductRelatedSection = styled.section`
   height: 100%;
+
+  .category-title {
+    padding-bottom: 4rem;
+    padding-left: 3rem; 
+  }
 `;
