@@ -1,40 +1,31 @@
-import React, { useState } from "react";
+import React from "react";
 import { useLoginMutation } from "../../features/auth/AuthApiSlice";
 import { useAppDispatch } from "../../app/hooks";
 import { setCredentials } from "../../features/auth/AuthSlice";
+import TextField from "../../components/TextField/TextField";
+import { Container } from "./styles";
+import Form from "../../components/Form/Form";
 
 const Login: React.FC = () => {
   const [login] = useLoginMutation();
   const dispatch = useAppDispatch();
 
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-
-    const data = await login({ email, password }).unwrap();
-    dispatch(setCredentials(data));
-    console.log(data);
+  const handleSubmit = (values) => {
+    /* const data = await login(values).unwrap();
+    dispatch(setCredentials(data)); */
+    console.log(values);
   };
 
-  const handleEmailChange = (event) => {
-    setEmail(event.target.value);
-  };
-
-  const handlePasswordChange = (event) => {
-    setPassword(event.target.value);
-  };
+  const formFields = [
+    { name: "email", label: "Email", type: "email" },
+    { name: "password", label: "Password", type: "password" },
+  ];
 
   return (
-    <div>
-      Login
-      <form onSubmit={handleSubmit}>
-        <input type="email" value={email} onChange={handleEmailChange} />
-        <input type="password" value={password} onChange={handlePasswordChange} />
-        <button type="submit">login</button>
-      </form>
-    </div>
+    <Container>
+      <TextField variant="h3" transform="capitalize" className="title">login</TextField>
+      <Form inputs={formFields} onSubmit={handleSubmit} className="form-container" />
+    </Container>
   );
 };
 

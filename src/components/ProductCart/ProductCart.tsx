@@ -15,8 +15,16 @@ const ProductCart: React.FC = ({ item }) => {
   };
 
   const handleAddProductQuantity = () => {
-    dispatch(updateQuantity(id))
-  }
+    dispatch(updateQuantity({ productId: id, quantity: quantity + 1 }));
+  };
+
+  const handleReduceProductQuantity = () => {
+    if (quantity > 1) {
+      dispatch(updateQuantity({ productId: id, quantity: quantity - 1 }));
+    } else {
+      dispatch(removeFromCart(id));
+    }
+  };
 
   return (
     <Card>
@@ -26,11 +34,11 @@ const ProductCart: React.FC = ({ item }) => {
       </TextField>
       <ProductControles>
         <Controles>
-          <Button>+</Button>
+          <Button onClick={handleAddProductQuantity}>+</Button>
           <TextField variant="h5" align="right" className="product-price">
             {quantity}
           </TextField>
-          <Button>-</Button>
+          <Button onClick={handleReduceProductQuantity}>-</Button>
         </Controles>
         <RemoveFromCartIcon onClick={handleRemoveFromCart} className="remove-from-cart" />
         <TextField variant="h5" align="right" className="product-price">
