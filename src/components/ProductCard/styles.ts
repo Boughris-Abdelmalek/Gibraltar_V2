@@ -12,8 +12,7 @@ export const Card = styled.div`
   border-radius: 2.5px;
   background-color: white;
   padding: 1rem;
-  cursor: pointer;
-
+  
   /* .product-title {
     min-height: 10rem;
   } */
@@ -22,6 +21,7 @@ export const Card = styled.div`
 export const ImageContainer = styled.div`
   height: 20rem;
   width: 100%;
+  cursor: pointer;
 `;
 
 export const Image = styled.img`

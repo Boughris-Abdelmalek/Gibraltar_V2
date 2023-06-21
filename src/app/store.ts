@@ -1,22 +1,36 @@
-import { configureStore } from "@reduxjs/toolkit";
+import { configureStore, combineReducers } from "@reduxjs/toolkit";
+import { persistReducer, FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER } from "redux-persist";
+
 import { fakeStoreApiSlice } from "./api/fakeStoreApi";
 import { firebaseApiSlice } from "./api/firebaseApi";
 import productsReducer from "../features/products/ProductsSlice";
+import cartReducer from "../features/cart/CartSlice";
 import authReducer from "../features/auth/AuthSlice";
 
+import storage from "redux-persist/lib/storage";
+
+const PersistConfig = {
+  key: "root",
+  storage: storage,
+  whitelist: ["auth", "products", "cart"],
+};
+
+const rootReducer = combineReducers({
+  [firebaseApiSlice.reducerPath]: firebaseApiSlice.reducer,
+  [fakeStoreApiSlice.reducerPath]: fakeStoreApiSlice.reducer,
+  auth: authReducer,
+  products: productsReducer,
+  cart: cartReducer,
+});
+
+const persistedReducer = persistReducer(PersistConfig, rootReducer);
+
 export const store = configureStore({
-  reducer: {
-    [fakeStoreApiSlice.reducerPath]: fakeStoreApiSlice.reducer,
-    [firebaseApiSlice.reducerPath]: firebaseApiSlice.reducer,
-    auth: authReducer,
-    products: productsReducer,
-  },
+  reducer: persistedReducer,
   middleware: (getDefaultMiddleware) =>
-  // check it later: https://redux-toolkit.js.org/usage/usage-guide#use-with-redux-persist
-    getDefaultMiddleware({ serializableCheck: false }).concat(
-      fakeStoreApiSlice.middleware,
-      firebaseApiSlice.middleware,
-    ),
+    getDefaultMiddleware({
+      serializableCheck: { ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER] },
+    }).concat(fakeStoreApiSlice.middleware, firebaseApiSlice.middleware),
   devTools: true,
 });
 

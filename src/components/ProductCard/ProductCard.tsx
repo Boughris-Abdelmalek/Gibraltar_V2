@@ -19,9 +19,13 @@ import { AddToCartIcon } from "../Icon/Icon";
 
 import { truncateTitle, generateStarRating } from "../../utils";
 import TextField from "../TextField/TextField";
+import { useAppDispatch } from "../../app/hooks";
+import { addToCart } from "../../features/cart/CartSlice";
 
 const ProductCard: React.FC<IProps> = ({ item }) => {
   const { title, image, price, rating, id } = item || {};
+
+  const dispatch = useAppDispatch();
 
   const truncatedTitle = truncateTitle(title);
   const starRating = generateStarRating(rating?.rate);
@@ -32,9 +36,13 @@ const ProductCard: React.FC<IProps> = ({ item }) => {
     navigate(`/products/${id}`);
   };
 
+  const handleAddToCart = () => {
+    dispatch(addToCart(item));
+  };
+
   return (
-    <Card onClick={handleClick}>
-      <ImageContainer>
+    <Card>
+      <ImageContainer onClick={handleClick}>
         <Image src={image} alt={title} />
       </ImageContainer>
       <ProductDetails>
@@ -47,7 +55,7 @@ const ProductCard: React.FC<IProps> = ({ item }) => {
         </Rating>
         <Price>{price}$</Price>
         <ProductActions>
-          <AddToCartIcon />
+          <AddToCartIcon onClick={handleAddToCart} />
           <BuyButton>buy</BuyButton>
         </ProductActions>
       </ProductDetails>
