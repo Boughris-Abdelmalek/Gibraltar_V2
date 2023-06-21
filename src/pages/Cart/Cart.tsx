@@ -1,27 +1,39 @@
 import React, { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { selectCartProducts, setCartProducts } from "../../features/cart/CartSlice";
+import { CartContainer, TotalContainer } from "./styles";
+import TextField from "../../components/TextField/TextField";
+import ProductCart from "../../components/ProductCart/ProductCart";
 
 const Cart: React.FC = () => {
   const dispatch = useAppDispatch();
-  const products = useAppSelector(selectCartProducts);
+  const { products, total } = useAppSelector(selectCartProducts);
 
   useEffect(() => {
     if (products) {
       dispatch(setCartProducts(products));
     }
   }, [products]);
-  // The Cart page should display the products currently in the user's cart, along with their quantity and total price. The user should be able to add or remove products from the cart on this page.
 
   return (
-    <div>
-      Cart
+    <CartContainer>
+      <TextField variant="h3" transform="uppercase" className="title">
+        cart
+      </TextField>
       <ul>
         {products.map((product) => {
-          return <li key={product.id}>{product.title}</li>;
+          return <ProductCart key={product.id} item={product} />;
         })}
       </ul>
-    </div>
+      <TotalContainer>
+        <TextField variant="h4" transform="uppercase" className="title">
+          total
+        </TextField>
+        <TextField variant="h4" transform="uppercase" className="title">
+          {total}$
+        </TextField>
+      </TotalContainer>
+    </CartContainer>
   );
 };
 

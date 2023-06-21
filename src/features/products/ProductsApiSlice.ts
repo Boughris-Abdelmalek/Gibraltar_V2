@@ -10,7 +10,16 @@ export const productsApiSlice = fakeStoreApiSlice.injectEndpoints({
           limit,
         },
       }),
+      transformResponse: (response: RootObject[]) => {
+        const productsWithQuantity = response.map((product) => ({
+          ...product,
+          quantity: 1, // Set the initial quantity to 0 or any default value
+        }));
+
+        return productsWithQuantity;
+      },
     }),
+
     getProductById: builder.query<RootObject, number>({
       query: (id) => ({
         url: `/products/${id}`,
